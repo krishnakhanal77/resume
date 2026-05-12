@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resume download</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7f9;
+        --fg: #1a1d23;
+        --muted: #5c6370;
+        --accent: #2563eb;
+        --accent-hover: #1d4ed8;
+        --card: #fff;
+        --border: #e2e5eb;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #12141a;
+          --fg: #eef0f4;
+          --muted: #9aa3b2;
+          --accent: #60a5fa;
+          --accent-hover: #93c5fd;
+          --card: #1a1d26;
+          --border: #2a2f3d;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 28rem;
+        width: 100%;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      }
+      h1 {
+        font-size: 1.35rem;
+        font-weight: 650;
+        margin: 0 0 0.5rem;
+      }
+      p.lead {
+        margin: 0 0 1.5rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      button {
+        appearance: none;
+        font: inherit;
+        cursor: pointer;
+        width: 100%;
+        border: 0;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+      }
+      button:hover {
+        background: var(--accent-hover);
+      }
+      button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .thanks {
+        margin: 1.25rem 0 0;
+        padding: 1rem;
+        border-radius: 8px;
+        background: rgba(37, 99, 235, 0.08);
+        color: var(--fg);
+        font-size: 0.9rem;
+        display: none;
+      }
+      .thanks.visible {
+        display: block;
+      }
+      @media (prefers-color-scheme: dark) {
+        .thanks {
+          background: rgba(96, 165, 250, 0.12);
+        }
+      }
+      .filename {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 1rem;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Resume</h1>
+      <p class="lead">Download my resume as a PDF.</p>
+      <button type="button" id="download">Download PDF</button>
+      <p class="filename" aria-hidden="true">krishna_kresume.pdf</p>
+      <p class="thanks" id="thanks" role="status" aria-live="polite">
+        Thank you for downloading. The PDF file is my resume.
+      </p>
+    </main>
+    <script>
+      (function () {
+        var btn = document.getElementById("download");
+        var thanks = document.getElementById("thanks");
+        var pdf = "krishna_kresume.pdf";
+
+        btn.addEventListener("click", function () {
+          var a = document.createElement("a");
+          a.href = pdf;
+          a.download = "krishna_kresume.pdf";
+          a.rel = "noopener";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          thanks.classList.add("visible");
+        });
+      })();
+    </script>
+  </body>
+</html>
